@@ -1,41 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
-import axios from 'axios'
-const API_URL = 'http://localhost:8080'
+import Navbar from "./components/Navbar";
+import Recipes from "./components/Recipes";
+import Brewers from "./components/Brewers";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
-  const checker = async () => {
-    const health = await axios.get(`${API_URL}/health`, {
-      headers: {
-        "Access-Control-Allow-Origin": "*"
-      }
-    })
-
-    console.log('Healh: ', health)
-  }
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <button onClick={checker}>
-          <p>
-            Click me!
-          </p>
-        </button>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Hi Jonny
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar />
+      <div className="content">
+        <Switch>
+        <Route exact path="/">
+           </Route>
+          <Route path="/create">
+            <Recipes />
+          </Route>
+          <Route path="/brewers">
+            <Brewers />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
